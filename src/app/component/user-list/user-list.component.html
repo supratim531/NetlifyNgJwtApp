@@ -1,0 +1,55 @@
+<!-- <div class="container-fluid">
+  <h1>This is User List</h1>
+  <div style="padding-bottom: 205px;"></div>
+</div> -->
+
+<!-- <div *ngIf="noCustomerExist; else elseBlock" class="text-primary md-con">
+  <h1>No Record(s) Found</h1>
+</div> -->
+
+<div class="container my-5">
+  <h1 class="text-center mb-4">User</h1>
+  <table class="table">
+    <thead class="thead-dark">
+      <tr>
+        <th class="text-center" scope="col">User ID</th>
+        <th class="text-center" scope="col">Username</th>
+        <th class="text-center" scope="col">Full Name</th>
+        <th class="text-center" scope="col">Email ID</th>
+        <th class="text-center" scope="col">User Role</th>
+        <th class="text-center" scope="col">Action</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let user of users">
+        <th class="text-center" scope="row"># GRYFFIND{{user.userId}}R</th>
+        <td class="text-center">{{user.username}}</td>
+        <td class="text-center" *ngIf="user.firstName !== '' || user.lastName !== '' else elseFullName">{{user.firstName}} {{user.lastName}}</td>
+        <ng-template #elseFullName>
+          <td class="text-center">N/A</td>
+        </ng-template>
+        <td class="text-center" *ngIf="user.email !== '' else elseEmail">{{user.email}}</td>
+        <ng-template #elseEmail>
+          <td class="text-center">N/A</td>
+        </ng-template>
+
+        <td style="font-size: 18px;" *ngIf="user.role.roleName !== 'ROLE_ADMIN'" class="text-center"><big><i class="fa-solid fa-user"></i></big></td>
+        <td style="font-size: 18px;" *ngIf="user.role.roleName === 'ROLE_ADMIN' && user.userId !== 0" class="text-center"><big><i class="fa-solid fa-user-shield"></i></big></td>
+        <td style="font-size: 18px;" *ngIf="user.role.roleName === 'ROLE_ADMIN' && user.userId === 0" class="text-center"><big><i class="fa-solid fa-user-secret"></i></big></td>
+
+        <td *ngIf="this.currentUser.userId === 0 else elseBlock" class="text-center">
+          <i *ngIf="user.userId === 0"><b style="opacity: 55%;">NO_ACTION</b></i>
+          <button *ngIf="user.userId !== 0" class="btn btn-primary mx-2" (click)="updateOnClick(user.userId)"><i class="fa-solid fa-user-pen"></i></button>
+          <button *ngIf="user.userId !== 0" class="btn btn-danger mx-2" (click)="deleteOnClick(user.userId)"><i class="fa-solid fa-user-slash"></i></button>
+        </td>
+        <ng-template #elseBlock>
+          <td class="text-center">
+            <i *ngIf="user.role.roleName === 'ROLE_ADMIN'"><b style="opacity: 55%;">NO_ACTION</b></i>
+            <button *ngIf="user.role.roleName !== 'ROLE_ADMIN'" class="btn btn-primary mx-2" (click)="updateOnClick(user.userId)"><i class="fa-solid fa-user-pen"></i></button>
+            <button *ngIf="user.role.roleName !== 'ROLE_ADMIN'" class="btn btn-danger mx-2" (click)="deleteOnClick(user.userId)"><i class="fa-solid fa-user-slash"></i></button>
+          </td>
+        </ng-template>
+      </tr>
+    </tbody>
+  </table>
+</div>

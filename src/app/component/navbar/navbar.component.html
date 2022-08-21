@@ -1,0 +1,59 @@
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel"><span *ngIf="this.isLoggedIn">{{this.currentUser.firstName}}'s Profile</span></h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body harry-potter">
+        <div *ngIf="this.isLoggedIn">
+          <h2 *ngIf="this.currentUser.role.roleName !== 'ROLE_ADMIN'" class="text-success">User Profile</h2>
+          <h2 *ngIf="this.currentUser.role.roleName === 'ROLE_ADMIN'" class="text-danger">Admin Profile <i class="fa-solid fa-broom-ball"></i></h2>
+          User ID: GryFFinD{{this.currentUser.userId}}R<br>
+          Username: {{this.currentUser.username}}<br>
+          Email: {{this.currentUser.email}}<br>
+          <span *ngIf="this.currentUser.firstName !== '' || this.currentUser.lastName !== '' else elseFullName">Full Name: {{this.currentUser.firstName}} {{this.currentUser.lastName}}<br></span>
+          <ng-template #elseFullName>
+            Full Name: N/A<br>
+          </ng-template>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <button type="button" (click)="alertMessage('user-profile-update works')" class="btn btn-warning" style="font-family: 'Harry Potter'">Update Profile</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark justify-content-center">
+  <div class="container-fluid">
+    <a class="navbar-brand"><span *ngIf="this.isLoggedIn">Dashboard | </span>JWT</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+      aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/home">Home</a>
+        </li>
+        <li *ngIf="this.isLoggedIn && this.isSuperuser" class="nav-item">
+          <a class="nav-link" routerLink="/all-users">Users</a>
+        </li>
+        <li *ngIf="this.isLoggedIn" class="nav-item">
+          <a class="nav-link" routerLink="/all-employees">Employees</a>
+        </li>
+      </ul>
+    </div>
+    <div>
+      <span *ngIf="this.isLoggedIn && !this.isSuperuser" class="text-warning" style="margin-right: 8px;">Welcome {{this.currentUsername}}</span>
+      <span *ngIf="this.isLoggedIn && this.isSuperuser" class="text-warning" style="margin-right: 8px;">Welcome (Admin) {{this.currentUsername}}</span>
+      <button *ngIf="!this.isLoggedIn" class="btn btn-success" style="margin-right: 8px;" routerLink="/login">Login</button>
+      <button *ngIf="!this.isLoggedIn" class="btn btn-primary" style="margin-right: 8px;" routerLink="/register">Register</button>
+      <button *ngIf="this.isLoggedIn" class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#exampleModal" style="margin-right: 8px;"><i class="fa-solid fa-house-user"></i></button>
+      <button *ngIf="this.isLoggedIn" class="btn btn-danger" style="margin-right: 8px;" (click)="logoutOnClick()"><i class="fa-solid fa-right-from-bracket"></i></button>
+    </div>
+  </div>
+</nav>
+<router-outlet></router-outlet>

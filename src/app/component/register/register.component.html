@@ -1,0 +1,55 @@
+<div class="m_top_card"></div>
+<section class="wrapper">
+  <div class="container-fluid">
+    <div class="col-sm-8 offset-sm-2 col-lg-6 offset-lg-3 col-xl-4 offset-xl-4 text-center">
+      <form [formGroup]="registerForm" (ngSubmit)="registerOnClick()" class="rounded bg-white shadow p-5">
+        <h3 class="text-dark fw-bolder fs-4 mb-2">Create an Account</h3>
+        <div class="fw-normal text-muted mb-4">
+          Already an User? <a routerLink="/login" class="text-primary fw-bold text-decoration-none">Sign in here</a>
+        </div>
+        <div *ngIf="this.errorMessage !== null" class="alert alert-danger alert-dismissible fade show" role="alert">
+          <strong>{{this.errorMessage}}</strong>
+          <button type="button" class="btn-close" (click)="this.closeErrorMessage()" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+        <div *ngIf="this.successMessage !== null" (click)="this.closeSuccessMessage()" class="alert alert-success alert-dismissible fade show" role="alert">
+          <strong>{{this.successMessage}}</strong>
+          <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+        <div class="form-floating mb-3">
+          <input type="text" class="form-control" id="fname" placeholder="First Name"
+          formControlName="fname" name="fname">
+          <label for="fname">First Name</label>
+        </div>
+        <div class="form-floating mb-3">
+          <input type="text" class="form-control" id="lname" placeholder="Last Name"
+          formControlName="lname" name="lname">
+          <label for="lname">Last Name</label>
+        </div>
+        <div class="form-floating mb-3">
+          <input type="email" class="form-control" id="email" placeholder="Email Address"
+          formControlName="email" name="email">
+          <label for="email">Email address</label>
+        </div>
+        <div class="form-floating mb-3">
+          <input type="text" class="form-control" id="uname" placeholder="Username"
+          formControlName="uname" name="uname">
+          <label for="uname">Username</label>
+        </div>
+        <div class="form-floating mb-3">
+          <input type="password" class="form-control" id="passw" placeholder="Password"
+          formControlName="passw" name="passw">
+          <label for="passw">Password</label>
+          <!-- <span class="password_info mt-2">
+            Use 8 or more characters with a mix of letters, numbers & symbols.
+          </span> -->
+        </div>
+        <div class="form-floating">
+          <input type="password" class="form-control" id="cpassw" placeholder="Confirm Password"
+          formControlName="cpassw" name="cpassw">
+          <label for="cpassw">Confirm Password</label>
+        </div>
+        <button type="submit" class="btn btn-primary submit_btn w-100 my-4">Create Account</button>
+      </form>
+    </div>
+  </div>
+</section>

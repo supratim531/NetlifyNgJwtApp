@@ -1,0 +1,31 @@
+<div class="m_top_card"></div>
+<section class="wrapper">
+  <div class="container-fluid">
+    <div class="col-sm-8 offset-sm-2 col-lg-6 offset-lg-3 col-xl-4 offset-xl-4 text-center">
+      <form [formGroup]="loginForm" (ngSubmit)="loginOnClick()" class="rounded bg-white shadow p-5">
+        <h3 class="text-dark fw-bolder fs-4 mb-2">Sign in to Website</h3>
+        <div class="fw-normal text-muted mb-4">
+          New Here? <a routerLink="/register" class="text-primary fw-bold text-decoration-none">Create an Account</a>
+        </div>
+        <div *ngIf="this.errorMessage !== null" class="alert alert-danger alert-dismissible fade show" role="alert">
+          <strong>{{this.errorMessage}}</strong>
+          <button type="button" class="btn-close" (click)="this.closeErrorMessage()" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+        <div class="form-floating mb-3">
+          <input type="text" class="form-control" id="username" placeholder="Username"
+          formControlName="username" name="username">
+          <label for="text">Username</label>
+        </div>
+        <div class="form-floating">
+          <input type="password" class="form-control" id="password" placeholder="Password"
+          formControlName="password" name="password">
+          <label for="password">Password</label>
+        </div>
+        <div class="mt-2 text-end">
+          <a routerLink="/login" (click)="alertMessage('\'Forget Password?\' works')" class="text-primary fw-bold text-decoration-none">Forget Password?</a>
+        </div>
+        <button type="submit" class="btn btn-primary submit_btn w-100 my-4">Continue</button>
+      </form>
+    </div>
+  </div>
+</section>

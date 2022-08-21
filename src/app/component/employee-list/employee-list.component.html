@@ -1,0 +1,39 @@
+<!-- <div class="container-fluid">
+  <h1>This is Employee List</h1>
+  <div style="padding-bottom: 205px;"></div>
+</div> -->
+
+<div class="container my-5">
+  <h1 class="text-center mb-4">Employee</h1>
+  <div *ngIf="0; else elseBlock" class="text-primary text-center" style="opacity: 40%;">
+    <h1>No Employee(s) Found</h1>
+  </div>
+  <ng-template #elseBlock>
+    <table class="table">
+      <thead class="thead-dark">
+        <tr>
+          <th class="text-center" scope="col">Employee ID</th>
+          <th class="text-center" scope="col">Full Name</th>
+          <th class="text-center" scope="col">Phone</th>
+          <th class="text-center" scope="col">Address</th>
+          <th class="text-center" scope="col">Email ID</th>
+          <th *ngIf="this.isSuperuser" class="text-center" scope="col">Action</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let employee of employees">
+          <th class="text-center" scope="row"># KFC30B{{employee.employeeId}}</th>
+          <td class="text-center">{{employee.fullName}}</td>
+          <td class="text-center">{{employee.phone}}</td>
+          <td class="text-center">{{employee.address}}</td>
+          <td class="text-center">{{employee.email}}</td>
+          <td *ngIf="this.isSuperuser" class="text-center">
+            <button class="btn btn-warning mx-2" (click)="this.updateOnClick(employee.employeeId)"><i class="fa-solid fa-marker"></i></button>
+            <button class="btn btn-danger mx-2" (click)="this.deleteOnClick(employee.employeeId)"><i class="fa-solid fa-trash-can"></i></button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+    <button *ngIf="!this.isSuperuser" class="btn btn-primary" (click)="registerOnClick()">Register as an Employee</button>
+  </ng-template>
+</div>
