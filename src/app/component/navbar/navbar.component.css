@@ -1,5 +1,7 @@
+@import url('http://fonts.cdnfonts.com/css/harry-potter');
+
 .harry-potter {
-  font-family: 'Harry Potter';
+  font-family: 'Harry Potter', sans-serif;
   text-align: center;
   color:#eeba30;
   font-size: 28px;
